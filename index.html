@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FocusFlow — Student Productivity & Assignment Dashboard</title>
+  <meta name="description" content="Turn your assignments into an actionable daily view with drag-and-drop priority boards, daily progress rings, and focus sessions." />
+  
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              200: '#c7d2fe',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace']
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Canvas Confetti CDN for celebrations -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  <!-- SortableJS CDN for touch and drag support -->
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.2/Sortable.min.js"></script>
+
+  <!-- Custom styles -->
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="bg-slate-100/70 text-slate-900 dark:bg-slate-950 dark:text-slate-100 min-h-screen flex flex-col antialiased selection:bg-indigo-500 selection:text-white pb-20 md:pb-0">
+
+  <div class="flex-1 flex flex-col min-h-screen">
+    
+    <!-- Top Header -->
+    <div id="header-container"></div>
+
+    <!-- Main Workspace: Sidebar + Content -->
+    <div class="flex-1 flex max-w-[1720px] w-full mx-auto">
+      
+      <!-- Desktop Sidebar -->
+      <aside
+        id="sidebar-container"
+        class="hidden md:block w-64 lg:w-72 flex-shrink-0 border-r border-slate-200/80 dark:border-slate-800 bg-white/50 dark:bg-slate-900/40 backdrop-blur-sm sticky top-[61px] h-[calc(100vh-61px)] overflow-y-auto"
+      >
+        <!-- Injected via sidebar.js -->
+      </aside>
+
+      <!-- Main Dynamic View Container -->
+      <main class="flex-1 min-w-0 p-4 sm:p-6 lg:p-8">
+        <div id="main-view-container" class="max-w-6xl mx-auto">
+          <!-- Views injected dynamically via store subscriptions -->
+        </div>
+      </main>
+
+    </div>
+
+  </div>
+
+  <!-- Mobile Bottom Navigation (Responsive Brownie Point) -->
+  <div id="mobile-bottom-nav"></div>
+
+  <!-- Mobile Slide-out Drawer Menu -->
+  <div id="mobile-drawer-root" class="fixed inset-0 z-50 md:hidden hidden">
+    <!-- Backdrop -->
+    <div id="mobile-drawer-backdrop" class="fixed inset-0 bg-slate-950/60 backdrop-blur-xs transition-opacity"></div>
+    
+    <!-- Drawer Panel -->
+    <div class="fixed inset-y-0 left-0 w-80 max-w-[85vw] bg-white dark:bg-slate-900 shadow-2xl z-10 flex flex-col border-r border-slate-200 dark:border-slate-800">
+      <div class="flex items-center justify-between p-4 border-b border-slate-200 dark:border-slate-800">
+        <span class="font-bold text-sm text-slate-800 dark:text-white">Navigation & Filters</span>
+        <button type="button" id="btn-close-mobile-drawer" class="p-1 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div id="mobile-drawer-content" class="flex-1 overflow-y-auto">
+        <!-- Rendered via sidebar.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Main ES Module Bootstrapper -->
+  <script type="module" src="js/app.js"></script>
+
+</body>
+</html>
