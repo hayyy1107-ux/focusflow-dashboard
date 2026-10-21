@@ -341,8 +341,18 @@ class FocusFlowApp {
   }
 }
 
-// Bootstrap application on DOM ready
-document.addEventListener('DOMContentLoaded', () => {
-  const app = new FocusFlowApp();
-  app.init();
-});
+// Resilient bootstrap for ES module environments
+function bootstrap() {
+  try {
+    const app = new FocusFlowApp();
+    app.init();
+  } catch (err) {
+    console.error('FocusFlow bootstrap error:', err);
+  }
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', bootstrap);
+} else {
+  bootstrap();
+}
